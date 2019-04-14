@@ -24,6 +24,11 @@ app = Flask(__name__)
 # [END create_app]
 
 
+@app.route('/')
+def home():
+    return ':gar:'
+
+
 # [START form]
 @app.route('/form')
 def form():
