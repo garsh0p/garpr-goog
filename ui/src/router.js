@@ -14,11 +14,6 @@ export default new Router({
       component: Rankings
     },
     {
-      path: '/rankings',
-      name: 'rankings',
-      component: Rankings
-    },
-    {
       path: '/tournaments',
       name: 'tournaments',
       component: () => import('./views/Tournaments.vue')

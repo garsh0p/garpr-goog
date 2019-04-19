@@ -1,19 +1,17 @@
 <template>
   <v-app>
-    <v-toolbar app tabs dark color="primary">
+    <v-toolbar app dark color="primary">
         <router-link to="/" tag="v-toolbar-title" class="headline text-uppercase">
                 GAR PR
         </router-link>
 
-      <template v-slot:extension>
-        <v-tabs centered grow color="transparent" v-model="activeTab">
-          <v-tab v-for="tab in tabs"
-                 :key="tab.id"
-                 :to="tab.route">
-            {{tab.name}}
-          </v-tab>
-        </v-tabs>
-      </template>
+        <v-toolbar-items class="ml-4">
+          <v-btn flat v-for="page of pages"
+                      :key="page.id"
+                      :to="page.route">
+            {{page.name}}
+          </v-btn>
+        </v-toolbar-items>
     </v-toolbar>
 
     <v-content>
@@ -30,22 +28,13 @@ export default {
   name: 'App',
   data() {
     return {
-      activeTab: '/rankings',
-      tabs: [
-        {id: 1, name: 'Rankings', route: '/rankings'},
+      pages: [
+        {id: 1, name: 'Rankings', route: '/'},
         {id: 2, name: 'Tournaments', route: '/tournaments'},
         {id: 3, name: 'About', route: '/about'},
         {id: 4, name: 'Login', route: '/login'},
       ]
     }
-  },
-  watch: {
-    // Update the tabs correctly when navigating to the home page.
-    $route(to, from) {
-      if (to.path === '/') {
-        this.activeTab = this.tabs[0].route;
-      }
-    }
-  },
+  }
 }
 </script>
