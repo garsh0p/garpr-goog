@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="display-3">FAQ</h1>
+    <h1 class="display-2">FAQ</h1>
 
     <h2 class="headline">What rating system do you use?</h2>
     <p class="body-1">Trueskill by Microsoft.</p>
