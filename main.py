@@ -14,39 +14,59 @@
 
 # [START app]
 import logging
+import urlparse
 
 # [START imports]
-from flask import Flask, render_template, request
+import flask
 # [END imports]
 
 # [START create_app]
-app = Flask(__name__)
+app = flask.Flask(__name__)
 # [END create_app]
 
 
 @app.route('/')
 def home():
-    return ':gar:'
+    return flask.render_template('index.html')
+
+
+@app.route('/upload_tournament', methods=['POST'])
+def upload_tournament():
+    url = flask.request.form['url']
+    parsed_url = urlparse.urlparse(url)
+    split_netloc = parsed_url.netloc.split('.')
+    if len(split_netloc) == 3 and split_netloc[0] != 'www':
+        subdomain = split_netloc[0]
+    else:
+        subdomain = ''
+    path = parsed_url.path.strip('/')
+
+    if subdomain:
+        challonge_id = subdomain + '-' + path
+    else:
+        challonge_id = path
+
+    return challonge_id
 
 
 # [START form]
 @app.route('/form')
 def form():
-    return render_template('form.html')
+    return flask.render_template('form.html')
 # [END form]
 
 
 # [START submitted]
 @app.route('/submitted', methods=['POST'])
 def submitted_form():
-    name = request.form['name']
-    email = request.form['email']
-    site = request.form['site_url']
-    comments = request.form['comments']
+    name = flask.request.form['name']
+    email = flask.request.form['email']
+    site = flask.request.form['site_url']
+    comments = flask.request.form['comments']
 
     # [END submitted]
     # [START render_template]
-    return render_template(
+    return flask.render_template(
         'submitted_form.html',
         name=name,
         email=email,

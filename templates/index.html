@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Submit a form</title>
+   <link rel="stylesheet" type="text/css" href="/static/style.css">
+  </head>
+  <body>
+    <div id="container">
+      <div class="pagetitle">
+        <h1>Submit a form</h1>
+      </div>
+      <div id="main">
+        <form method="post" action="{{ url_for('upload_tournament') }}">
+          <label for="url">URL:</label>
+          <input type="text" name="url"><br />
+          <input type="submit">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
