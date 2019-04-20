@@ -1,2 +1,5 @@
 Flask==0.12.4
 Werkzeug<0.13.0,>=0.12.0
+iso8601==0.1.12
+requests==2.21.0
+requests-toolbelt==0.9.1

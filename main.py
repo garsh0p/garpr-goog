@@ -14,7 +14,9 @@
 
 # [START app]
 import logging
+import os
 import urlparse
+import challonge
 
 # [START imports]
 import flask
@@ -46,7 +48,15 @@ def upload_tournament():
     else:
         challonge_id = path
 
-    return challonge_id
+    scraper = challonge.ChallongeScraper(challonge_id)
+
+    print scraper.get_players()
+    print scraper.get_matches()
+
+    return flask.jsonify({
+        'players': scraper.get_players(),
+        'matches': scraper.get_matches()
+    })
 
 
 # [START form]

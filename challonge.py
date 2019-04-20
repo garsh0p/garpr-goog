@@ -1,10 +1,10 @@
 import iso8601
 import os
 import requests
-import parse
+from requests_toolbelt.adapters import appengine
 
-from config import config
-from model import AliasMatch
+appengine.monkeypatch()
+
 
 
 BASE_CHALLONGE_API_URL = 'https://api.challonge.com/v1/tournaments'
@@ -18,11 +18,10 @@ MATCHES_URL = os.path.join(BASE_CHALLONGE_API_URL, '%s', 'matches.json')
 
 class ChallongeScraper(object):
 
-    def __init__(self, tournament_id, config_file_path=config.DEFAULT_CONFIG_PATH):
-        self.tournament_id = tournament_id
-        self.config = config.Config(config_file_path=config_file_path)
-        self.api_key = self.config.get_challonge_api_key()
+    def __init__(self, tournament_id):
+        self.api_key = os.environ.get('CHALLONGE_KEY')
         self.api_key_dict = {'api_key': self.api_key}
+        self.tournament_id = tournament_id
 
         self.raw_dict = None
         self.get_raw()
@@ -79,7 +78,8 @@ class ChallongeScraper(object):
             if winner_id is not None and loser_id is not None:
                 winner = player_map[winner_id]
                 loser = player_map[loser_id]
-                match_result = AliasMatch(winner=winner, loser=loser)
+                # TODO db object here?
+                match_result = {'winner':winner, 'loser':loser}
                 matches.append(match_result)
         return matches
 
