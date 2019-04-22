@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-toolbar app dark color="primary">
-        <router-link to="/" tag="v-toolbar-title" class="headline text-uppercase">
+        <router-link to="/" tag="div" class="headline text-uppercase">
                 GAR PR
         </router-link>
 
