@@ -32,7 +32,7 @@ def home():
     return flask.render_template('index.html')
 
 
-@app.route('/upload_tournament', methods=['POST'])
+@app.route('/api/upload_tournament', methods=['POST'])
 def upload_tournament():
     url = flask.request.form['url']
     parsed_url = urlparse.urlparse(url)

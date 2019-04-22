@@ -22,7 +22,7 @@
 export default {
   data: () => ({
     headers: [
-      {text: 'Δ', value: 'delta', sortable: false, width: '1%'},
+      {text: '', value: 'delta', sortable: false, width: '1%'},
       {text: 'Rank', value: 'rank', sortable: false, width: '1%'},
       {text: 'Name', value: 'name', sortable: false},
       {text: 'Rating', value: 'rating', sortable: false},

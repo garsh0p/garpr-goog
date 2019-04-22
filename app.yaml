@@ -6,8 +6,18 @@ libraries:
 - name: ssl
   version: latest
 
+skip_files:
+- ui/
+
 handlers:
-- url: /static
-  static_dir: static
-- url: /.*
+- url: /api/.*
   script: main.app
+
+- url: /(.*\.(js|css|png|map))$
+  static_files: dist/\1
+  upload: dist/.*\.(js|css|png|map)$
+
+# Catch all handler to index.html
+- url: /.*
+  static_files: dist/index.html
+  upload: dist/index.html
