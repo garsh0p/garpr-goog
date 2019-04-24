@@ -1,5 +1,7 @@
 <template>
   <div>
+    <RankingsControlPanel v-if="loggedIn" />
+
     <h1 class="display-2">Rankings</h1>
 
     <v-data-table
@@ -19,8 +21,15 @@
 </template>
 
 <script>
+import RankingsControlPanel from '@/components/RankingsControlPanel.vue'
+
 export default {
+  components: {
+    RankingsControlPanel,
+  },
   data: () => ({
+    loggedIn: true,
+
     headers: [
       {text: '', value: 'delta', sortable: false, width: '1%'},
       {text: 'Rank', value: 'rank', sortable: false, width: '1%'},

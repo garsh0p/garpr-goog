@@ -5,14 +5,13 @@
 
         <v-card-text>
           <v-container>
-          <v-form v-model="valid">
+          <v-form ref="form" v-model="valid">
             <v-text-field label="Username"
                           :rules="required"
                           required>
             </v-text-field>
 
             <v-text-field label="Password"
-                          v-model="password"
                           type="password"
                           :rules="required"
                           required>
@@ -47,14 +46,14 @@ export default {
       },
       set(value) {
         if (!value) {
-          this.password = '';
+          this.$refs.form.reset();
+          this.$refs.form.resetValidation();
         }
         this.$emit('input', value);
       },
     }
   },
   data: () => ({
-    password: '',
     valid: false,
     required: [v => !!v || 'Field is required'],
   })

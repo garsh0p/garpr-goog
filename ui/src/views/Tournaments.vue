@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1 class="display-2">Tournaments</h1>
+    <v-layout row>
+      <v-flex grow>
+        <h1 class="display-2">Tournaments</h1>
+      </v-flex>
+      <v-btn v-if="loggedIn" color="error">Upload a Tournament</v-btn>
+    </v-layout>
 
     <v-data-table
       hide-actions
@@ -11,6 +16,12 @@
       <template v-slot:items="props">
         <td>{{props.item.date}}</td>
         <td>{{props.item.name}}</td>
+        <td v-if="loggedIn">
+          <v-btn icon>
+            <v-icon>delete
+            </v-icon>
+          </v-btn>
+        </td>
       </template>
     </v-data-table>
   </div>
@@ -19,9 +30,12 @@
 <script>
 export default {
   data: () => ({
+    loggedIn: true,
+
     headers: [
       {text: 'Date', value: 'date', sortable: false, width: '1%'},
       {text: 'Name', value: 'name', sortable: false},
+      {text: '', value: 'delete', sortable: false},
     ],
 
     // TODO: Make that API call.
