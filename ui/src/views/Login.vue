@@ -16,7 +16,7 @@
         required>
       </v-text-field>
 
-      <v-btn :disabled="!valid" color="success" to="admin">
+      <v-btn :disabled="!valid" color="success">
         Login
       </v-btn>
     </v-form>
