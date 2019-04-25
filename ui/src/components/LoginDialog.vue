@@ -12,6 +12,7 @@
             </v-text-field>
 
             <v-text-field label="Password"
+                          v-model="password"
                           type="password"
                           :rules="required"
                           required>
@@ -45,11 +46,15 @@ export default {
         return this.value;
       },
       set(value) {
+        if (!value) {
+          this.password = '';
+        }
         this.$emit('input', value);
       },
     }
   },
   data: () => ({
+    password: '',
     valid: false,
     required: [v => !!v || 'Field is required'],
   })
