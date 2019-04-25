@@ -11,7 +11,6 @@
         Upload a Tournament
       </v-btn>
       <UploadDialog v-model="uploadDialog" />
-      <v-btn v-if="loggedIn" color="error">Upload a Tournament</v-btn>
     </v-layout>
 
     <v-data-table

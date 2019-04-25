@@ -14,19 +14,15 @@
 
       <v-spacer></v-spacer>
 
-      <v-menu bottom left offset-y>
+      <v-tooltip bottom>
         <template v-slot:activator="{on}">
-          <v-btn icon v-on="on">
-            <v-icon>more_vert</v-icon>
+          <v-btn icon v-on="on" @click.stop="login">
+            <v-icon>build</v-icon>
           </v-btn>
         </template>
-
-        <v-list dense>
-          <v-list-tile @click.stop="login" >
-            <v-list-tile-title>Login</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
+        <span>Login</span>
+      </v-tooltip>
+    </v-menu>
     </v-toolbar>
 </template>
 

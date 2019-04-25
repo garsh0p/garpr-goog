@@ -1,21 +1,17 @@
 <template>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <v-card-title class="headline">
-          Upload a Tournament
-          <span class="subtitle">Enter a Challonge URL</span>
-          <span class="subtitle">Enter a Challonge URL</span>
-        </v-card-title>
+        <v-card-title class="headline">Upload a Tournament</v-card-title>
 
         <v-card-text>
           <v-container>
-          <v-form ref="form" v-model="valid">
-            <v-text-field label="Tournament URL"
-                          :rules="validUrl"
-                          outline
-                          required>
-            </v-text-field>
-          </v-form>
+            <v-form ref="form" v-model="valid">
+              <v-text-field label="Tournament URL"
+                            :rules="validUrl"
+                            outline
+                            required>
+              </v-text-field>
+            </v-form>
           </v-container>
         </v-card-text>
 
@@ -54,7 +50,7 @@ export default {
   },
   data: () => ({
     valid: false,
-    validUrl: [v => /challonge.com\/.+/.test(v) || 'Invalid Challonge URL'],
+    validUrl: [v => /challonge\.com\/.+/.test(v) || 'Invalid Challonge URL'],
   })
 }
 </script>
