@@ -11,6 +11,7 @@
         Upload a Tournament
       </v-btn>
       <UploadDialog v-model="uploadDialog" />
+      <v-btn v-if="loggedIn" color="error">Upload a Tournament</v-btn>
     </v-layout>
 
     <v-data-table
@@ -22,6 +23,12 @@
       <template v-slot:items="props">
         <td>{{props.item.date}}</td>
         <td>{{props.item.name}}</td>
+        <td v-if="loggedIn">
+          <v-btn icon>
+            <v-icon>delete
+            </v-icon>
+          </v-btn>
+        </td>
       </template>
     </v-data-table>
   </div>
@@ -41,6 +48,7 @@ export default {
     headers: [
       {text: 'Date', value: 'date', sortable: false, width: '1%'},
       {text: 'Name', value: 'name', sortable: false},
+      {text: '', value: 'delete', sortable: false},
     ],
 
     // TODO: Make that API call.
