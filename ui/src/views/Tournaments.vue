@@ -1,8 +1,5 @@
 <template>
   <div>
-<<<<<<< Updated upstream
-    <h1 class="display-2">Tournaments</h1>
-=======
     <v-layout row>
       <v-flex grow>
         <h1 class="display-2">Tournaments</h1>
@@ -15,7 +12,6 @@
       </v-btn>
       <UploadDialog v-model="uploadDialog" />
     </v-layout>
->>>>>>> Stashed changes
 
     <v-data-table
       hide-actions
@@ -39,12 +35,9 @@ export default {
     UploadDialog,
   },
   data: () => ({
-<<<<<<< Updated upstream
-=======
     loggedIn: true,
     uploadDialog: false,
 
->>>>>>> Stashed changes
     headers: [
       {text: 'Date', value: 'date', sortable: false, width: '1%'},
       {text: 'Name', value: 'name', sortable: false},
