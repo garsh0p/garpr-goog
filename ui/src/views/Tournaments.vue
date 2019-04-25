@@ -1,6 +1,21 @@
 <template>
   <div>
+<<<<<<< Updated upstream
     <h1 class="display-2">Tournaments</h1>
+=======
+    <v-layout row>
+      <v-flex grow>
+        <h1 class="display-2">Tournaments</h1>
+      </v-flex>
+      <v-btn
+            v-if="loggedIn"
+            color="error"
+            @click.stop="uploadDialog=true">
+        Upload a Tournament
+      </v-btn>
+      <UploadDialog v-model="uploadDialog" />
+    </v-layout>
+>>>>>>> Stashed changes
 
     <v-data-table
       hide-actions
@@ -17,8 +32,19 @@
 </template>
 
 <script>
+import UploadDialog from '@/components/UploadDialog.vue';
+
 export default {
+  components: {
+    UploadDialog,
+  },
   data: () => ({
+<<<<<<< Updated upstream
+=======
+    loggedIn: true,
+    uploadDialog: false,
+
+>>>>>>> Stashed changes
     headers: [
       {text: 'Date', value: 'date', sortable: false, width: '1%'},
       {text: 'Name', value: 'name', sortable: false},

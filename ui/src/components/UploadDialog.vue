@@ -1,19 +1,18 @@
 <template>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <v-card-title class="headline">Login</v-card-title>
+        <v-card-title class="headline">
+          Upload a Tournament
+          <span class="subtitle">Enter a Challonge URL</span>
+          <span class="subtitle">Enter a Challonge URL</span>
+        </v-card-title>
 
         <v-card-text>
           <v-container>
-          <v-form v-model="valid">
-            <v-text-field label="Username"
-                          :rules="required"
-                          required>
-            </v-text-field>
-
-            <v-text-field label="Password"
-                          type="password"
-                          :rules="required"
+          <v-form ref="form" v-model="valid">
+            <v-text-field label="Tournament URL"
+                          :rules="validUrl"
+                          outline
                           required>
             </v-text-field>
           </v-form>
@@ -27,7 +26,7 @@
                  flat
                  :disabled="!valid"
                  @click.stop="dialog=false">
-                 Login
+                 Upload
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -45,13 +44,17 @@ export default {
         return this.value;
       },
       set(value) {
+        if (!value) {
+          this.$refs.form.reset();
+          this.$refs.form.resetValidation();
+        }
         this.$emit('input', value);
       },
     }
   },
   data: () => ({
     valid: false,
-    required: [v => !!v || 'Field is required'],
+    validUrl: [v => /challonge.com\/.+/.test(v) || 'Invalid Challonge URL'],
   })
 }
 </script>
