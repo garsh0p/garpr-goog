@@ -22,7 +22,6 @@
         </template>
         <span>Login</span>
       </v-tooltip>
-    </v-menu>
     </v-toolbar>
 </template>
 
