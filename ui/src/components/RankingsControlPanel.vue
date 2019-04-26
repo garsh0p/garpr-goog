@@ -37,13 +37,13 @@
             </v-text-field>
             <v-text-field
                     label="sigma"
-                    hint="The initial standard deviation of ratings. The recommended value is a third of mu. (default: 8.33)"
+                    hint="The initial standard deviation of ratings. The recommended value is a mu/3. (default: 8.33)"
                     type="number"
                     v-model="sigma">
             </v-text-field>
             <v-text-field
                     label="tau"
-                    hint="The dynamic factor which restrains a fixation of rating. The recommended value is sigma per cent. (default: 0.083)"
+                    hint="The dynamic factor which restrains a fixation of rating. The recommended value is sigma/100. (default: 0.083)"
                     type="number"
                     v-model="tau">
             </v-text-field>
