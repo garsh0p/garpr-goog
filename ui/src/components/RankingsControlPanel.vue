@@ -31,19 +31,19 @@
             <h2 class="title">TrueSkill Parameters</h2>
             <v-text-field
                     label="mu"
-                    hint="The initial mean of ratings."
+                    hint="The initial mean of ratings. (default: 25)"
                     type="number"
                     v-model="mu">
             </v-text-field>
             <v-text-field
                     label="sigma"
-                    hint="The initial standard deviation of ratings. The recommended value is a third of mu."
+                    hint="The initial standard deviation of ratings. The recommended value is a third of mu. (default: 8.33)"
                     type="number"
                     v-model="sigma">
             </v-text-field>
             <v-text-field
                     label="tau"
-                    hint="The dynamic factor which restrains a fixation of rating. The recommended value is sigma per cent."
+                    hint="The dynamic factor which restrains a fixation of rating. The recommended value is sigma per cent. (default: 0.083)"
                     type="number"
                     v-model="tau">
             </v-text-field>

@@ -16,11 +16,11 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{on}">
-          <v-btn icon v-on="on" @click.stop="login">
-            <v-icon>build</v-icon>
+          <v-btn icon v-on="on" @click.stop="toggleLogin">
+            <v-icon>{{loginButton.icon}}</v-icon>
           </v-btn>
         </template>
-        <span>Admin Login</span>
+        <span>{{loginButton.label}}</span>
       </v-tooltip>
     </v-toolbar>
 </template>
@@ -28,6 +28,19 @@
 <script>
 export default {
   data: () => ({
+    loggedIn: false,
+
+    buttons: {
+      login: {
+        icon: "build",
+        label: "Admin Login",
+      },
+      logout: {
+        icon: "exit_to_app",
+        label: "Logout",
+      },
+    },
+
     pages: [
       {id: 1, name: 'Rankings', route: '/'},
       {id: 2, name: 'Tournaments', route: '/tournaments'},
@@ -35,9 +48,22 @@ export default {
     ],
   }),
   methods: {
-    login() {
-      this.$emit('login');
+    toggleLogin() {
+      if (this.loggedIn) {
+        // Logout
+      } else {
+        this.$emit('login');
+      }
     }
-  }
+  },
+  computed: {
+    loginButton: function() {
+      if (this.loggedIn) {
+        return this.buttons.logout;
+      } else {
+        return this.buttons.login;
+      }
+    }
+  },
 }
 </script>
