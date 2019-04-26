@@ -11,7 +11,7 @@
       class="elevation-1">
 
       <template v-slot:items="props">
-        <td>-</td>
+        <td><!-- TODO: Rank up/down --></td>
         <td class="font-weight-bold">{{props.item.rank}}</td>
         <td>{{props.item.name}}</td>
         <td>{{props.item.rating}}</td>

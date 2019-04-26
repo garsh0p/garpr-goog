@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Toolbar @login="showLogin = true" />
+    <Toolbar @login="showLogin=true" />
     <LoginDialog v-model="showLogin" />
 
     <v-content>
@@ -23,11 +23,6 @@ export default {
     Toolbar,
   },
   data: () => ({
-    pages: [
-      {id: 1, name: 'Rankings', route: '/'},
-      {id: 2, name: 'Tournaments', route: '/tournaments'},
-      {id: 3, name: 'About', route: '/about'},
-    ],
     showLogin: false,
   })
 }

@@ -20,7 +20,7 @@
             <v-icon>build</v-icon>
           </v-btn>
         </template>
-        <span>Login</span>
+        <span>Admin Login</span>
       </v-tooltip>
     </v-toolbar>
 </template>
