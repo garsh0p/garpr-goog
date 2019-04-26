@@ -28,7 +28,7 @@ export default {
     RankingsControlPanel,
   },
   data: () => ({
-    loggedIn: true,
+    loggedIn: false,
 
     headers: [
       {text: '', value: 'delta', sortable: false, width: '1%'},

@@ -41,10 +41,10 @@ export default {
     UploadDialog,
   },
   data: () => ({
-    loggedIn: true,
+    loggedIn: false,
     uploadDialog: false,
 
-    headers: [
+    allHeaders: [
       {text: 'Date', value: 'date', sortable: false, width: '1%'},
       {text: 'Name', value: 'name', sortable: false},
       {text: '', value: 'delete', sortable: false},
@@ -60,5 +60,14 @@ export default {
       {date: '03/21/19', name: "MTV Melee 110"},
     ],
   }),
+  computed: {
+    headers: function() {
+      if (!this.loggedIn) {
+        return this.allHeaders.slice(0, -1);
+      }
+
+      return this.allHeaders;
+    }
+  },
 }
 </script>
