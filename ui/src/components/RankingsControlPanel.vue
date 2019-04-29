@@ -33,19 +33,19 @@
                     label="mu"
                     hint="The initial mean of ratings. (default: 25)"
                     type="number"
-                    v-model="mu">
+                    v-model="trueskill.mu">
             </v-text-field>
             <v-text-field
                     label="sigma"
                     hint="The initial standard deviation of ratings. The recommended value is a mu/3. (default: 8.33)"
                     type="number"
-                    v-model="sigma">
+                    v-model="trueskill.sigma">
             </v-text-field>
             <v-text-field
                     label="tau"
                     hint="The dynamic factor which restrains a fixation of rating. The recommended value is sigma/100. (default: 0.083)"
                     type="number"
-                    v-model="tau">
+                    v-model="trueskill.tau">
             </v-text-field>
 
             <v-btn color="error">Recalculate Rankings</v-btn>
@@ -62,9 +62,11 @@ export default {
     minAttendence: 1,
     rankingPeriod: 999,
 
-    mu: 25.0,
-    sigma: 8.33,
-    tau: .083,
+    trueskill: {
+      mu: 25.0,
+      sigma: 8.33,
+      tau: .083,
+    },
   })
 }
 </script>

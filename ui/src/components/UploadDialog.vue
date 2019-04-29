@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <v-card-title class="headline">Upload a Tournament</v-card-title>
+        <v-card-title class="headline">Import Tournament</v-card-title>
 
         <v-card-text>
           <v-container>
@@ -50,6 +50,7 @@ export default {
   },
   data: () => ({
     valid: false,
+    // TODO: Accept Smash.gg URLs too.
     validUrl: [v => /challonge\.com\/.+/.test(v) || 'Invalid Challonge URL'],
   })
 }
