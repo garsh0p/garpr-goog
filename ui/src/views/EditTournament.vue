@@ -2,7 +2,7 @@
   <div>
     <h1 class="display-2">Edit Tournament</h1>
 
-    <v-tabs v-model="activeTab">
+    <v-tabs>
       <v-tab ripple :key="1">
         Players
       </v-tab>
@@ -11,21 +11,38 @@
       </v-tab>
 
       <v-tab-item :key="1">
-        TODO
+        <v-data-table
+            hide-actions
+            :headers="playerHeaders"
+            :items="players"
+            class="elevation-1">
+
+          <template v-slot:items="props">
+            <td>
+              <v-checkbox hide-details v-model="props.item.isNew">
+              </v-checkbox>
+            </td>
+            <td>
+              <v-text-field v-model="props.item.tag"
+                            :label="props.item.originalTag"
+                            clearable>
+              </v-text-field>
+            </td>
+          </template>
+        </v-data-table>
       </v-tab-item>
 
       <v-tab-item :key="2">
-        <v-data-table
-        hide-actions
-        :headers="headers"
-        :items="matches"
-        class="elevation-1">
+        <v-data-table hide-actions
+                      :headers="headers"
+                      :items="matches"
+                      class="elevation-1">
 
-          <template v-slot:items="props">
-            <td style="color: green"
-                :style="tagStyles(props.item)">
-              {{props.item.winner}}
-            </td>
+            <template v-slot:items="props">
+              <td style="color: green"
+                  :style="tagStyles(props.item)">
+                {{props.item.winner}}
+              </td>
             <td>
               <v-btn icon @click="swapWinner(props.item)">
                 <v-icon>swap_horiz</v-icon>
@@ -36,7 +53,8 @@
               {{props.item.loser}}
             </td>
             <td>
-              <v-checkbox v-model="props.item.exclude"></v-checkbox>
+              <v-checkbox v-model="props.item.exclude" hide-details>
+              </v-checkbox>
             </td>
           </template>
         </v-data-table>
@@ -48,7 +66,6 @@
 <script>
 export default {
   data: () => ({
-    activeTab: 2,
     headers: [
       {text: 'Winner', value: 'winner', sortable: false},
       {text: '', value: 'swap', sortable: false},
@@ -60,12 +77,25 @@ export default {
       {winner: 'Ryan', loser: 'Lane', exclude: false, swapped: false},
       {winner: 'DJSwerve', loser: 'LaneOG', exclude: false, swapped: false},
     ],
+
+    playerHeaders: [
+      {text: 'New Player', value: 'isNew', sortable: false, width: '1%'},
+      {text: 'Tag', value: 'tag', sortable: false},
+    ],
+
+    players: [
+      {tag: null, originalTag: 'Ryan', isNew: false},
+      {tag: null, originalTag: 'Lane', isNew: false},
+      {tag: null, originalTag: 'DJSwerve', isNew: false},
+      {tag: null, originalTag: 'LaneOG', isNew: false},
+    ],
   }),
   methods: {
     swapWinner: function(item) {
       [item.winner, item.loser] = [item.loser, item.winner];
       item.swapped = !item.swapped;
     },
+
     tagStyles: function(item) {
       let style = {};
       if (item.swapped) {
