@@ -6,18 +6,18 @@ from requests_toolbelt.adapters import appengine
 appengine.monkeypatch()
 
 
-
 BASE_CHALLONGE_API_URL = 'https://api.challonge.com/v1/tournaments'
-TOURNAMENT_URL = os.path.join(BASE_CHALLONGE_API_URL, '%s.json')
-PARTICIPANTS_URL = os.path.join(
-    BASE_CHALLONGE_API_URL, '%s', 'participants.json')
-MATCHES_URL = os.path.join(BASE_CHALLONGE_API_URL, '%s', 'matches.json')
+URLS = {
+    'tournament': os.path.join(BASE_CHALLONGE_API_URL, '%s.json'),
+    'participants': os.path.join(
+            BASE_CHALLONGE_API_URL, '%s', 'participants.json'),
+    'matches': os.path.join(BASE_CHALLONGE_API_URL, '%s', 'matches.json'),
+}
 
 # http://api.challonge.com/v1
 
 
 class ChallongeScraper(object):
-
     def __init__(self, tournament_id):
         self.api_key = os.environ.get('CHALLONGE_KEY')
         self.api_key_dict = {'api_key': self.api_key}
@@ -27,19 +27,14 @@ class ChallongeScraper(object):
         self.get_raw()
 
     def get_raw(self):
-        if self.raw_dict is None:
-            self.raw_dict = {}
+        if self.raw_dict is not None:
+            return self.raw_dict
 
-            url = TOURNAMENT_URL % self.tournament_id
-            self.raw_dict['tournament'] = self._check_for_200(
-                requests.get(url, params=self.api_key_dict)).json()
+        self.raw_dict = {}
 
-            url = MATCHES_URL % self.tournament_id
-            self.raw_dict['matches'] = self._check_for_200(
-                requests.get(url, params=self.api_key_dict)).json()
-
-            url = PARTICIPANTS_URL % self.tournament_id
-            self.raw_dict['participants'] = self._check_for_200(
+        for key, url in URLS.items():
+            url = url % self.tournament_id
+            self.raw_dict[key] = self._check_for_200(
                 requests.get(url, params=self.api_key_dict)).json()
 
         return self.raw_dict
