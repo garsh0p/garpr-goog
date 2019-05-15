@@ -48,6 +48,39 @@ class ChallongeScraper(object):
     def get_date(self):
         return iso8601.parse_date(self.get_raw()['tournament']['tournament']['created_at'])
 
+    def _human_round_names(self, matches):
+        """Convert round names from numbers into strings like WQF and LF."""
+        last_round = matches[-1]['round']
+
+        SUFFIXES = ['GF', 'F', 'SF', 'QF']
+
+        rounds = {}
+        for i, finals in enumerate(SUFFIXES):
+            rounds[last_round-i] = finals
+        for i, finals in enumerate(SUFFIXES[1:]):
+            rounds[-(last_round-i)-1] = finals
+
+        reset = matches[-1]['round'] == matches[-2]['round']
+        reset_count = 1
+
+        for m in matches:
+            r = m['round']
+            name = 'W' if r > 0 else 'L'
+            if r not in rounds:
+                name = '{}R{}'.format(name, abs(r))
+            else:
+                if rounds[r] != 'GF':
+                    name += rounds[r]
+                else:
+                    name = 'GF'
+
+                    if reset:
+                        name += str(reset_count)
+                        reset_count += 1
+
+            m['round'] = name
+
+
     def get_matches(self):
         # sometimes challonge seems to use the "group_player_ids" parameter of "participant" instead
         # of the "id" parameter of "participant" in the "matches" api.
@@ -70,12 +103,14 @@ class ChallongeScraper(object):
             set_count = m['scores_csv']
             winner_id = m['winner_id']
             loser_id = m['loser_id']
+            round_num = m['round']
             if winner_id is not None and loser_id is not None:
                 winner = player_map[winner_id]
                 loser = player_map[loser_id]
                 # TODO db object here?
-                match_result = {'winner':winner, 'loser':loser}
+                match_result = {'winner': winner, 'loser': loser, 'round': round_num}
                 matches.append(match_result)
+        self._human_round_names(matches)
         return matches
 
     def get_players(self):
