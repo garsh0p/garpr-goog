@@ -39,6 +39,9 @@
                       class="elevation-1">
 
             <template v-slot:items="props">
+              <td>
+              {{props.item.round}}
+            </td>
               <td style="color: green"
                   :style="tagStyles(props.item)">
                 {{props.item.winner}}
@@ -67,6 +70,7 @@
 export default {
   data: () => ({
     headers: [
+      {text: 'Round', value: 'round', sortable: false, width: '1%'},
       {text: 'Winner', value: 'winner', sortable: false},
       {text: '', value: 'swap', sortable: false},
       {text: 'Loser', value: 'loser', sortable: false},
@@ -74,12 +78,12 @@ export default {
     ],
 
     matches: [
-      {winner: 'Ryan', loser: 'Lane', exclude: false, swapped: false},
-      {winner: 'DJSwerve', loser: 'LaneOG', exclude: false, swapped: false},
+      {round: 'WR1', winner: 'Ryan', loser: 'Lane', exclude: false, swapped: false},
+      {round: 'WR1', winner: 'DJSwerve', loser: 'LaneOG', exclude: false, swapped: false},
     ],
 
     playerHeaders: [
-      {text: 'New Player', value: 'isNew', sortable: false, width: '1%'},
+      {text: 'New Player?', value: 'isNew', sortable: false, width: '1%'},
       {text: 'Tag', value: 'tag', sortable: false},
     ],
 
