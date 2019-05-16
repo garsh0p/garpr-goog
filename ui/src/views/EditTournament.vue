@@ -1,6 +1,32 @@
 <template>
   <div>
-    <h1 class="display-2">Edit Tournament</h1>
+    <v-layout row>
+      <v-flex grow>
+        <h1 class="display-2">Edit Tournament</h1>
+      </v-flex>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>save</v-icon>
+          </v-btn>
+        </template>
+        <span>Save Changes</span>
+      </v-tooltip>
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>delete</v-icon>
+          </v-btn>
+        </template>
+        <span>Delete</span>
+      </v-tooltip>
+
+      <v-btn color="error">
+        Publish
+      </v-btn>
+    </v-layout>
+    <h2 class="headline">MTV Melee 116 - PENDING</h2>
 
     <v-tabs>
       <v-tab ripple :key="1">

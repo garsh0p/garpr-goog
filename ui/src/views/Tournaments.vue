@@ -41,7 +41,7 @@ export default {
     UploadDialog,
   },
   data: () => ({
-    loggedIn: false,
+    loggedIn: true,
     uploadDialog: false,
 
     allHeaders: [
